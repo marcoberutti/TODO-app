@@ -3,12 +3,16 @@ html, body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
-  padding: 1rem;
+  padding: 0;
   background-color: #23272F;
   height: 100%;
 }
 
-#root, .App {
+html, body, .App {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Contenuto allineato verso l'alto */
+  flex-wrap: wrap;
   height: 100%;
 }
 
@@ -40,7 +44,7 @@ button:hover {
   padding: 0 30px 30px 30px;
   width: fit-content;
   margin: 0 auto;
-  transform: translateY(50%);
+  margin-top: 50px;
 }
 
 .subContainer {
@@ -62,11 +66,25 @@ button:hover {
 .inputContainer {
   width: fit-content;
   margin: 0 auto;
+  display: flex;
+
 }
 
 .inputForm input {
   width: 150px;
-  padding: 2px 5px;
+  padding: 5px;
+  line-height: 1.5;
+  box-sizing: border-box;
+  min-height: 1.5em;
+  border: 1px solid #d7d2d2;
+  font-family: inherit;
+    border-radius: 5px;
+}
+
+.inputForm input:focus {
+  outline: none;
+  border: 1px solid rgb(139, 205, 218); /* Cambia il bordo quando è attivo */
+  box-shadow: 0 0 5px rgba(139, 205, 218, 0.8); /* Aggiungi un effetto visivo */
 }
 
 .inputForm button {
@@ -104,8 +122,51 @@ button:hover {
 .task {
   background-color: rgb(63, 110, 126);
   padding: 10px;
-  display: grid;
-  grid-template-rows: 1fr;
-  grid-template-columns: 20px 1fr auto auto;
+  display: flex;
+  justify-content: space-between;
+  color: white;
+}
+
+.task div {
+  display: flex;
   gap: 10px;
+}
+
+.checked {
+  text-decoration: line-through;
+  color: black;
+}
+
+@media (max-width: 630px) {
+
+  .mainContainer {
+    width: 90%; /* Occupare quasi tutta la larghezza disponibile */
+    padding: 15px;
+  }
+
+  .tasksContainer {
+    width: 96%; /* Rimuovi larghezze fisse */
+    padding: 10px;
+
+  }
+
+  .task {
+    flex-wrap: wrap;
+    gap: 50px; /* Riduci lo spazio tra gli elementi */
+    justify-content: space-between; /* Allinea gli elementi a sinistra */
+  }
+
+  .inputForm input {
+    width: 100%; /* L'input si espande */
+  }
+
+  .buttonsContainer {
+    margin: 0;
+    margin-top: 15px;
+  }
+
+  .buttonsContainer, .buttons {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
 }
