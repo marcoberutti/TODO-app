@@ -1,13 +1,111 @@
-body {
+html, body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 1rem;
+  background-color: #23272F;
+  height: 100%;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+#root, .App {
+  height: 100%;
+}
+
+h2 {
+  text-align: center;
+  padding: 10px;
+  margin: 0;
+}
+
+button {
+  border: none;
+  background-color: rgb(139, 205, 218);
+  padding: 5px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: rgb(47, 148, 206);
+}
+
+.active {
+  background-color: rgb(50, 77, 110);
+  color: white;
+}
+
+.mainContainer {
+  background-color: rgb(139, 205, 218);
+  padding: 0 30px 30px 30px;
+  width: fit-content;
+  margin: 0 auto;
+  transform: translateY(50%);
+}
+
+.subContainer {
+  background-color: whitesmoke;
+  padding: 20px;
+  padding-top: 10px;
+}
+
+.inputForm {
+  margin: 15px 0;
+  margin-top: 5px;
+}
+
+.inputForm h3 {
+  margin: 10px 0 5px 0;
+  text-align: center;
+}
+
+.inputContainer {
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.inputForm input {
+  width: 150px;
+  padding: 2px 5px;
+}
+
+.inputForm button {
+  margin-left: 5px;
+  padding: 4px 5px;
+}
+
+.buttonsContainer {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin: 15px;
+  margin-bottom: 0;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.tasksContainer {
+  width: 500px;
+  background-color: rgb(46, 84, 97);
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.subContainer h4 {
+  margin: 15px 0;
+}
+
+.task {
+  background-color: rgb(63, 110, 126);
+  padding: 10px;
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 20px 1fr auto auto;
+  gap: 10px;
 }
