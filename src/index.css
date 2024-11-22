@@ -4,7 +4,7 @@ html, body {
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   padding: 0;
-  /* background-color: #23272F; */
+  background-color: #23272F;
   height: 100%;
 }
 
@@ -67,7 +67,7 @@ button:hover {
   width: fit-content;
   margin: 0 auto;
   display: flex;
-
+  gap: 8px;
 }
 
 .inputForm input {
@@ -78,7 +78,7 @@ button:hover {
   min-height: 1.5em;
   border: 1px solid #d7d2d2;
   font-family: inherit;
-    border-radius: 5px;
+  border-radius: 5px;
 }
 
 .inputForm input:focus {
@@ -88,7 +88,6 @@ button:hover {
 }
 
 .inputForm button {
-  margin-left: 5px;
   padding: 4px 5px;
 }
 
@@ -163,7 +162,7 @@ button:hover {
   font-family: 'Material Symbols Outlined';
   font-weight: normal;
   font-style: normal;
-  font-size: 20px;
+  font-size: 15px;
   line-height: 1;
   letter-spacing: normal;
   text-transform: none;
@@ -173,7 +172,6 @@ button:hover {
   direction: ltr;
   -webkit-font-feature-settings: 'liga';
   -webkit-font-smoothing: antialiased;
-  margin-top: 1px;
 }
 
 .task button {

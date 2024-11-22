@@ -1,14 +1,16 @@
 function TasksReducer(tasks, action){
   switch(action.type) {
     case 'added': {
-      return [
+      return (
+        [
         ...tasks,
         {
           id: action.id,
           nome: action.nome,
+          formattedDate: action.formattedDate,
           completed: false
         }
-      ]
+      ])
     }
     case 'deleted': {
       return tasks.filter(task => action.id !== task.id);

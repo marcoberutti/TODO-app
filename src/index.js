@@ -6,11 +6,17 @@ import reportWebVitals from './reportWebVitals';
 
 let taskList = JSON.parse(localStorage.getItem('tasks')) || []
 
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App tasks={taskList}/>
+    <div className="App">
+      <div className="mainContainer">
+        <h2>I miei task</h2>
+        <div className="subContainer">
+          <App tasks={taskList}/>
+        </div>
+      </div>
+    </div>
   </React.StrictMode>
 );
 

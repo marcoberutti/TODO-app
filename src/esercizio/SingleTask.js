@@ -1,10 +1,11 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, useContext } from 'react'
+import { TasksDispatchContext } from '../TasksContext';
 
-function SingleTask({isCompleted, name, deleteTask, id, toggleTaskCompletion, editTask}){
+function SingleTask({isCompleted, name, id, formattedDate}){
+  const dispatch = useContext(TasksDispatchContext)
   const [isEditing, setIsEditing] = useState(false);
   const [newTaskName, setNewTaskName] = useState('');
   const editInputRef = useRef(null); 
-
   useEffect(() => {
     if(isEditing){
       editInputRef.current.focus()
@@ -17,7 +18,11 @@ function SingleTask({isCompleted, name, deleteTask, id, toggleTaskCompletion, ed
 
   function handleSubmit(e){
     e.preventDefault();
-    editTask(id, newTaskName)
+    dispatch({
+      type: 'edited',
+      newName: newTaskName,
+      id
+    })
     setNewTaskName('')
     setIsEditing(false)
   }
@@ -27,15 +32,30 @@ function SingleTask({isCompleted, name, deleteTask, id, toggleTaskCompletion, ed
     setIsEditing(false)
   }
 
+  function deleteTask(){
+    dispatch({
+      type: 'deleted',
+      id
+    })
+  }
+  
+  function toggleTaskCompletion() {
+    dispatch({
+      type: 'toggled',
+      id
+    })
+  }
+
   let taskView =(
     <>
       <div>
         <input 
           type="checkbox" 
-          onChange={() => toggleTaskCompletion(id)}
+          onChange={() => toggleTaskCompletion()}
           checked={isCompleted}
         />
         <span className={isCompleted ? "checked" : ''}>{name}</span>
+        <span>{(formattedDate.replace('T', ' '))}</span>
       </div>
       <div>
         <button className='addTaskBtn'>
@@ -44,7 +64,7 @@ function SingleTask({isCompleted, name, deleteTask, id, toggleTaskCompletion, ed
           </span>
         </button>
         <button onClick={()=> setIsEditing(true)}>Modifica</button>
-        <button onClick={()=>deleteTask(id)}>Elimina</button>
+        <button onClick={()=>deleteTask()}>Elimina</button>
       </div>
     </>
   )

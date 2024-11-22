@@ -1,7 +1,14 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, useContext } from 'react'
+import { TasksDispatchContext } from '../TasksContext'
+import { nanoid } from 'nanoid/non-secure'
+import ModalError from './ModalError'
 
-function Form({addTask}){
+function Form(){
+  const dispatch = useContext(TasksDispatchContext)
   const [nome, setNome] = useState('')
+  const [formattedDate, setDate] = useState('')
+  const [error, setError] = useState('')
+
   const NewTaskInput = useRef('')
 
   useEffect(() => {
@@ -12,10 +19,23 @@ function Form({addTask}){
     setNome(e.target.value);
   }
 
+  function handleDataChange(e){
+    setDate(e.target.value)
+  }
+
   function handleAdding(){
-    if(nome.trim()){
-      addTask(nome)
-      setNome('')
+    if(nome.trim() && formattedDate ){
+    dispatch({
+      type: 'added',
+      id: nanoid(),
+      formattedDate,
+      nome: NewTaskInput.current.value
+    })
+    setNome('')
+    setDate('');
+    setError('')
+    } else {
+      setError('data obbligatoria')
     }
   }
 
@@ -35,12 +55,20 @@ function Form({addTask}){
           value={nome} 
           onChange={handleChange}
           onKeyDown={handleAddingFromEnter}
-          />
+        />
+        <input 
+          type="datetime-local"
+          value={formattedDate}
+          onChange={handleDataChange}
+          required
+        />
         <button 
           onClick={handleAdding}
           >
           Aggiungi
         </button>
+        {error && <ModalError val={error} />}        
+        {/* TODO INSERIRE ANCHE INPUT TYPE DATE PER COLLEGARE AL GOOGLE CALENDAR O TASKS */}
       </div>
     </div>
   )
