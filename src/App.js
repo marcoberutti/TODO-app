@@ -1,11 +1,11 @@
-import './App.css';
 // import Lezione from './lezione/Lezione';import { useState, useEffect } from 'react'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useReducer } from 'react'
 import { nanoid } from 'nanoid/non-secure'
 import Form from "./esercizio/Input"
 import Buttons from "./esercizio/Buttons"
 import Tasks from "./esercizio/Tasks"
 import SingleTask from './esercizio/SingleTask';
+import TasksReducer from './taskReducer'
 
 const FILTERS = {
   Tutti: ()=> true,
@@ -14,7 +14,7 @@ const FILTERS = {
 }
 
 function App(props) {
-  const [tasks, setTasks] = useState(props.tasks);
+  const [tasks, dispatch] = useReducer(TasksReducer, props.tasks)
   const [filter, setFilter] = useState('Tutti')
 
   useEffect(()=>{
@@ -35,42 +35,36 @@ function App(props) {
       />
     )
 
-  function addTask(name){
-    const newTask = {
+  function addTask(nome){
+    dispatch({
+      type: 'added',
       id: nanoid(),
-      nome: name,
-      completed: false
-    }
-    setTasks([...tasks, newTask])
+      nome
+    })
   }
 
   function deleteTask(id){
-    const remainingTasks = tasks
-    .filter(task => id !== task.id)
-    setTasks(remainingTasks)
+    dispatch({
+      type: 'deleted',
+      id
+    })
   }
 
   function editTask(id, newName){
-    const editedTask = tasks.map(task =>{
-      if(task.id === id) {
-        return {...task, nome: newName}
-      }
-      return task
-    });
-    setTasks(editedTask)
+    dispatch({
+      type: 'edited',
+      newName,
+      id
+    })
   }
-
 
   function toggleTaskCompletion(id) {
-    const updatedTask = tasks
-    .map(task => {
-      if(id === task.id){
-        return { ...task, completed: !task.completed}
-      }
-      return task;
-      })
-      setTasks(updatedTask)
+    dispatch({
+      type: 'toggled',
+      id
+    })
   }
+
   return (
     <div className="App">
       {/* <Lezione /> */}
