@@ -1,6 +1,6 @@
-import { useState, useEffect, useReducer } from 'react'
-import { TasksContext, TasksDispatchContext } from './TasksContext'
-import { TasksReducer, Form, Buttons, Tasks, SingleTask } from './esercizio';
+import { useState, useEffect, useContext } from 'react'
+import { TasksContext } from './TasksContext'
+import { Form, Buttons, Tasks, SingleTask } from './esercizio';
 
 const FILTERS = {
   Tutti: ()=> true,
@@ -10,7 +10,7 @@ const FILTERS = {
 
 function App(props) {
 
-  const [tasks, dispatch] = useReducer(TasksReducer, props.tasks)
+  const tasks = useContext(TasksContext)
   const [filter, setFilter] = useState('Tutti')
 
   useEffect(()=>{
@@ -22,22 +22,18 @@ function App(props) {
     .map(task => 
       <SingleTask
         key={task.id}
-        isCompleted={task.completed}
-        formattedDate={task.formattedDate}
-        name={task.nome}
-        id={task.id}
+        task={task}
       />
     )
 
   return (
-    <TasksContext.Provider value={tasks}>
-      <TasksDispatchContext.Provider value={dispatch}>
-        <Form />
-        <hr/>
-        <Buttons setFilter={setFilter} filters={FILTERS} filter={filter}/>
-        <Tasks taskList={taskList}/>
-      </TasksDispatchContext.Provider>
-    </TasksContext.Provider>
+    <>
+      <Form />
+      <hr/>
+      <Buttons setFilter={setFilter} filters={FILTERS} filter={filter}/>
+      <Tasks taskList={taskList}/>
+    </>
+
   );
 }
 

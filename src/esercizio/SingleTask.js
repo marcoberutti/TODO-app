@@ -1,11 +1,12 @@
 import { useState, useRef, useEffect, useContext } from 'react'
 import { TasksDispatchContext } from '../TasksContext';
 
-function SingleTask({isCompleted, name, id, formattedDate}){
+function SingleTask({task}){
   const dispatch = useContext(TasksDispatchContext)
   const [isEditing, setIsEditing] = useState(false);
   const [newTaskName, setNewTaskName] = useState('');
-  const editInputRef = useRef(null); 
+  const editInputRef = useRef(null);
+
   useEffect(() => {
     if(isEditing){
       editInputRef.current.focus()
@@ -21,7 +22,7 @@ function SingleTask({isCompleted, name, id, formattedDate}){
     dispatch({
       type: 'edited',
       newName: newTaskName,
-      id
+      id: task.id
     })
     setNewTaskName('')
     setIsEditing(false)
@@ -35,14 +36,14 @@ function SingleTask({isCompleted, name, id, formattedDate}){
   function deleteTask(){
     dispatch({
       type: 'deleted',
-      id
+      id: task.id
     })
   }
   
   function toggleTaskCompletion() {
     dispatch({
       type: 'toggled',
-      id
+      id: task.id
     })
   }
 
@@ -52,10 +53,10 @@ function SingleTask({isCompleted, name, id, formattedDate}){
         <input 
           type="checkbox" 
           onChange={() => toggleTaskCompletion()}
-          checked={isCompleted}
+          checked={task.completed}
         />
-        <span className={isCompleted ? "checked" : ''}>{name}</span>
-        <span>{(formattedDate.replace('T', ' '))}</span>
+        <span className={task.completed ? "checked" : ''}>{task.nome}</span>
+        <span className={task.completed ? "checked" : ''}>{(task.formattedDate.replace('T', ' '))}</span>
       </div>
       <div>
         <button className='addTaskBtn'>
@@ -73,7 +74,7 @@ function SingleTask({isCompleted, name, id, formattedDate}){
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="">
-            Modifica {name}
+            Modifica {task.nome}
           </label>
           <input
             ref={editInputRef}

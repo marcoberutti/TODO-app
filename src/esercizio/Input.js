@@ -8,7 +8,6 @@ function Form(){
   const [nome, setNome] = useState('')
   const [formattedDate, setDate] = useState('')
   const [error, setError] = useState('')
-
   const NewTaskInput = useRef('')
 
   useEffect(() => {
@@ -34,8 +33,12 @@ function Form(){
     setNome('')
     setDate('');
     setError('')
-    } else {
+    } else if(!nome.trim() && formattedDate ) {
+      setError('testo obbligatorio')
+    } else if(nome.trim() && !formattedDate ){
       setError('data obbligatoria')
+    } else {
+      setError('data e testo obbligatori')
     }
   }
 

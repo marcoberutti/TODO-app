@@ -3,8 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-
-let taskList = JSON.parse(localStorage.getItem('tasks')) || []
+import TasksProvider from './TasksContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -13,7 +12,9 @@ root.render(
       <div className="mainContainer">
         <h2>I miei task</h2>
         <div className="subContainer">
-          <App tasks={taskList}/>
+          <TasksProvider>
+            <App />
+          </TasksProvider>
         </div>
       </div>
     </div>
