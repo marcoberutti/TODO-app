@@ -107,7 +107,8 @@ button:hover {
 }
 
 .tasksContainer {
-  width: 500px;
+  min-width: 500px;
+  width: fit-content;
   background-color: rgb(46, 84, 97);
   padding: 15px;
   display: flex;
@@ -123,13 +124,60 @@ button:hover {
   background-color: rgb(63, 110, 126);
   padding: 10px;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   color: white;
+  gap: 15px;
 }
 
 .task div {
   display: flex;
   gap: 10px;
+}
+
+.task form{
+  gap: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.task form, form div:first-child {
+  width: fit-content;
+  width: 100%;
+}
+
+.addTaskBtn{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@font-face {
+  font-family: 'Material Symbols Outlined';
+  font-style: normal;
+  font-weight: 100 700;
+  src: url(https://fonts.gstatic.com/icon/font?kit=kJEhBvYX7BgnkSrUwT8OhrdQw4oELdPIeeII9v6oFsKTDIw8elXwrN8s&skey=b8dc2088854b122f&v=v220) format('woff2');
+}
+
+.material-symbols-outlined {
+  font-family: 'Material Symbols Outlined';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 20px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+  margin-top: 1px;
+}
+
+.task button {
+  max-height: 25px;
 }
 
 .checked {
@@ -145,6 +193,7 @@ button:hover {
   }
 
   .tasksContainer {
+    min-width: 150px;
     width: 96%; /* Rimuovi larghezze fisse */
     padding: 10px;
 
@@ -154,6 +203,14 @@ button:hover {
     flex-wrap: wrap;
     gap: 50px; /* Riduci lo spazio tra gli elementi */
     justify-content: space-between; /* Allinea gli elementi a sinistra */
+  }
+
+  .task form{
+    flex-wrap: wrap;
+  }
+  
+  .task form div{
+    flex-wrap: wrap;
   }
 
   .inputForm input {

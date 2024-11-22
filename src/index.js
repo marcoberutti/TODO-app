@@ -4,11 +4,13 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+let taskList = JSON.parse(localStorage.getItem('tasks')) || []
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App/>
+    <App tasks={taskList}/>
   </React.StrictMode>
 );
 
